@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+
+    <style>
+        body {
+            background-color: #101820;
+            color: #b0d91a;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+ 
+        .clock-container {
+            text-align: center;
+            background-color: #1c2833;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px #00ffcc;
+        }
+
+        h1 {
+            color: white;
+            font-size: 28px;
+        }
+
+        #clock {
+            font-size: 50px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        #date {
+            color: #ffffff;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="clock-container">
+        <h1>Digital Clock</h1>
+        <div id="clock">00:00:00 AM</div>
+        <div id="date"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+
+            let hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const ampm = hours >= 12 ? "PM" : "AM";
+
+            hours = hours % 12;
+            hours = hours === 0 ? 12 : hours;
+
+            const formattedHours = String(hours).padStart(2, "0");
+            const formattedMinutes = String(minutes).padStart(2, "0");
+            const formattedSeconds = String(seconds).padStart(2, "0");
+
+            document.getElementById("clock").textContent =
+                `${formattedHours}:${formattedMinutes}:${formattedSeconds} ${ampm}`;
+
+            document.getElementById("date").textContent =
+                now.toLocaleDateString();
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+
+</body>
+</html>
+
